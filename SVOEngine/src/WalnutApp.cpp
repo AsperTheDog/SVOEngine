@@ -11,6 +11,8 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtx/intersect.hpp>
 
+#include <fstream>
+
 #define SUBSAMPLE 0
 
 glm::vec3 homogenize(const glm::vec4& p)
@@ -23,10 +25,10 @@ class ExampleLayer : public Walnut::Layer
 public:
 	virtual void OnAttach() override
 	{
-		setRandSeed(0x1234142);
+		ColorFunctions::setRandSeed(0x1234142);
 		this->svo.populate(1);
 
-		camPos = glm::vec3(1200, 1200, 1200);
+		camPos = glm::vec3(1600, 1500, 1600);
 		camDir = glm::normalize(glm::vec3(-1, -1, -1));
 		
 		assert(NodeIndexer::test());
@@ -46,8 +48,10 @@ public:
 
 		ImGui::Begin("Viewport");
 
-		width = (uint32_t)ImGui::GetContentRegionAvail().x >> SUBSAMPLE;
-		height = (uint32_t)ImGui::GetContentRegionAvail().y >> SUBSAMPLE;
+		//width = (uint32_t)ImGui::GetContentRegionAvail().x >> SUBSAMPLE;
+		//height = (uint32_t)ImGui::GetContentRegionAvail().y >> SUBSAMPLE;
+		width = 2560;
+		height = 1440;
 		if (image)
 			ImGui::Image(image->GetDescriptorSet(), { 
 				(float)(image->GetWidth() << SUBSAMPLE),
@@ -67,7 +71,7 @@ private:
 	glm::mat4 V{}, P{};
 	glm::vec3 camPos{}, camDir{};
 
-	SVO svo{10, 9000000000, color_randomBlend};
+	SVO svo{10, 9000000000, ColorFunctions::ambientOcclusionEffect};
 
 	inline uint32_t getIndexFromCoord(uint32_t x, uint32_t y)
 	{
@@ -117,6 +121,10 @@ private:
 		}
 
 		image->SetData(imageData);
+		
+		//std::fstream imgout("MyImage.bin", std::fstream::out | std::fstream::binary);
+		//imgout.write(reinterpret_cast<char*>(imageData), width * height * 4);
+		//imgout.close();
 	}
 };
 

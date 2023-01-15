@@ -133,7 +133,7 @@ void SVO::populateRec(SVONode* node, uint8_t depth, glm::u8vec3 baseColor, glm::
 	{
 		if (this->indexer.size() == maxIndexes || depth == this->maxDepth) break;
 
-		uint8_t random = rand2() % 100;
+		uint8_t random = ColorFunctions::rand2() % 100;
 		if (random < 80)
 		{
 			children.setChild(i, true);

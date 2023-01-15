@@ -1,3 +1,4 @@
+![image](https://github.com/AsperTheDog/SVOEngine/blob/master/images/banner.png?raw=true)
 # Walnut App Template
 
 This project is made using this simple app template for [Walnut](https://github.com/TheCherno/Walnut)

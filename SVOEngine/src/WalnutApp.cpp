@@ -48,10 +48,8 @@ public:
 
 		ImGui::Begin("Viewport");
 
-		//width = (uint32_t)ImGui::GetContentRegionAvail().x >> SUBSAMPLE;
-		//height = (uint32_t)ImGui::GetContentRegionAvail().y >> SUBSAMPLE;
-		width = 2560;
-		height = 1440;
+		width = (uint32_t)ImGui::GetContentRegionAvail().x >> SUBSAMPLE;
+		height = (uint32_t)ImGui::GetContentRegionAvail().y >> SUBSAMPLE;
 		if (image)
 			ImGui::Image(image->GetDescriptorSet(), { 
 				(float)(image->GetWidth() << SUBSAMPLE),
